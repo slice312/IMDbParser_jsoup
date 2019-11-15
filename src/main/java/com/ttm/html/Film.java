@@ -1,7 +1,7 @@
 package com.ttm.html;
 
 import java.util.HashMap;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.stream.Collectors;
@@ -43,7 +43,7 @@ public class Film
             for (String genre : f.getGenre())
             {
                 if (!map.containsKey(genre))
-                    map.put(genre, new LinkedList<>());
+                    map.put(genre, new ArrayList<>(3));
                 map.get(genre).add(f);
             }
         }

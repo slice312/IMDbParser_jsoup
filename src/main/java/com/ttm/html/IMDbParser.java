@@ -6,7 +6,7 @@ import org.jsoup.nodes.Element;
 import org.jsoup.select.Elements;
 
 import java.io.IOException;
-import java.util.LinkedList;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 import java.util.concurrent.ExecutorService;
@@ -33,13 +33,6 @@ public class IMDbParser
         Map<String, List<Film>> genres = Film.groupByGenre(films);
 
 
-        "NEW LINE\n".chars()
-                .mapToObj((ch) -> {
-                    return (char) ch;
-                })
-                .forEach(System.out::print);
-
-
         years.forEach((k, v) -> {
             System.out.println("KEY: " + k);
             System.out.println("VALUES: ");
@@ -53,7 +46,7 @@ public class IMDbParser
 
     public static List<Film> readFilms() throws IOException
     {
-        final List<Film> films = new LinkedList<>();
+        final List<Film> films = new ArrayList<>(250);
 
         Document doc = Jsoup.connect(url + "/chart/top")
                 .userAgent(userAgent)
@@ -100,7 +93,7 @@ public class IMDbParser
                                     .selectFirst("div.subtext")
                                     .getElementsByTag("a");
 
-                            LinkedList<String> list = new LinkedList<>();
+                            List<String> list = new ArrayList<>(3);
                             for (int i = 0; i < elems.size() - 1; i++)
                                 list.add(elems.get(i).ownText());
 
